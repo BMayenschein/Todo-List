@@ -24,5 +24,18 @@ async function updateCompleted(e) {
 trashCans.forEach(trashCan => trashCan.addEventListener('click', removeItem));
 
 async function removeItem(e) {
-    console.log(e.target);
-}
+    let item = e.target.parentNode.children[0].textContent;
+    try {
+        const res = await fetch('removeItem', {
+            method: "DELETE",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify( {'item': item})
+        })
+        const data = await res.json();
+        console.log(data)
+        location.reload();
+    }
+    catch(err) {
+        console.log(err)
+    }
+};

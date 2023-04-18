@@ -39,8 +39,6 @@ app.post('/addTodo', async(req, res) => {
 
 app.put('/setComplete', async(req,res)=> {
     const item = await req.body.item;
-    
-  
     db.collection('Item_List').updateOne(
         { "task" : item },
         [
@@ -60,33 +58,16 @@ app.put('/setComplete', async(req,res)=> {
         ]
         
     )
-    // db.collection('Item_List').findOne({task: item})
-    // .then(result => {
-    //     console.log(result.completed)
-    //     if (result.completed) {
-    //         try {
-    //             db.collection('Item_List').updateOne(
-    //                 {"task": item},
-    //                 {$set: {"completed" : false}}
-    //             )
-    //         } catch (e) {
-    //             console.log(e);
-    //         }
-    //     }
-    //     else {
-    //         try {
-    //             db.collection('Item_List').updateOne(
-    //                 {"task": item},
-    //                 {$set: {"completed" : true}}
-    //             )
-    //         }
-    //         catch (e) {
-    //             console.log(e);
-    //         }
-    //     }
-    //     console.log(result);
-    // })
     res.json('Task has been updated');
+})
+
+app.delete('/removeItem', async(req,res) => {
+    const item = await req.body.item;
+    db.collection('Item_List').deleteOne({"task": item})
+    .then(result => {
+        console.log(`${item} has been deleted`);
+        res.json(`${item} has been deleted`);
+    })
 })
 
 app.listen(process.env.PORT || PORT, ()=>{
