@@ -9,27 +9,7 @@
         <link rel="stylesheet" href="css/style.css">
     </head>
     <body>
-        <h1>Todo List: </h1>
-        <ul class="todoItems">
-            <% for(let i=0; i < items.length; i++) {%>
-                <li class="items">
-                    <% if(items[i].completed === true) {%>
-                        <span class='item completed'><%= items[i].task %></span>
-                    <% }else{ %>
-                        <span class='item'><%= items[i].task %></span>
-                    <% } %>    
-                    <span class='fa fa-trash'></span>
-                </li>
-            <% } %>
-        </ul>
-
-        <h2>Left to do: <%= left %></h2>
-
-        <h2>Add a Todo: </h2>
-        <form action="/addTodo" method="POST">
-            <input type="text" name="todoItem" placeholder="Thing To DO">
-            <input type="submit">
-        </form>
+        <a href="/todos">Create a Todo List!</a>
 
         <script src="js/main.js"></script>
     </body>
